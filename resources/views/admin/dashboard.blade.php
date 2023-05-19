@@ -6,6 +6,6 @@
   <hr>
 
   <ul>
-    <li><a href="{{route('admin.projects.index')}}">Mostra tutti i post</a></li>
+    <li><a href="{{route('admin.projects.index')}}">Mostra tutti i progetti</a></li>
   </ul>
 @endsection
