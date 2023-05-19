@@ -1,7 +1,7 @@
 @extends('layouts/admin')
 
 @section('content')
-  <h1>Pagina di amministrazione</h1>
+  <h1 class="text-center">Il tuo spazio personale</h1>
 
   <hr>
 
