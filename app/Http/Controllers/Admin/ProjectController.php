@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Admin;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Project;
 use Illuminate\Http\Request;
+use PhpParser\Node\Expr\Cast\String_;
 
 class ProjectController extends Controller
 {
@@ -15,7 +16,8 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        return "ora mi vedi?";
+        $projects = Project::all();
+        return view("admin.projects.index", compact("projects"));
     }
 
     /**
@@ -25,9 +27,9 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin/projects/create');
     }
-
+    //Str::slug($formData['title'], '-')
     /**
      * Store a newly created resource in storage.
      *
@@ -36,7 +38,13 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $this->validation($request);
+        $formData = $request->all();
+        $newProject = new Project();
+        $newProject->slug = Str::slug($formData["title"], "-");
+        $newProject->fill($formData);
+        $newProject->save();
+        return redirect()->route('admin/projects/show', $newProject->id);
     }
 
     /**
@@ -47,7 +55,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        //
+        return view('admin/projects/show', compact('project'));
     }
 
     /**
